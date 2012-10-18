@@ -224,7 +224,11 @@ begin
 							cpu_state <= S3;
 							exe_state <= P1;
 					end case;
-				
+
+
+				--BEGIN ANL -------------------------------------------------------------------------					
+
+
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
 					case exe_state is
@@ -302,7 +306,171 @@ begin
 							exe_state <= P1; 
 							cpu_state <= S3;
 						end case;
-					
+				--END ANL -------------------------------------------------------------------------					
+
+				--BEGIN ORL -------------------------------------------------------------------------					
+
+
+				-- ORL A, Rn
+				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0)); --Rn
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte;
+							RAM_READ_BYTE(xE0);
+							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- ORL A, direct
+				when "01000101" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte;
+							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- ORL A, @Ri
+				when "01000110" | "01000111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));	-- Compute and get Rn value
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_ram_doByte);							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- ORL A, #data
+				when "01000100" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0);
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;				
+
+				--ORL direct, A
+				when "01000010" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte; -- Store AC value into DR
+							exe_state <= P1; 
+							cpu_state <= S3;
+						end case;
+	
+				--ORL direct, #data
+				when "01000011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S3;
+						end case;
+				--END ORL -------------------------------------------------------------------------					
+
+				--BEGIN XRL -------------------------------------------------------------------------					
+				-- XRL A, Rn
+				when "01101000" | "01101001" | "01101010" | "01101011" | "01101100" | "01101101" | "01101110" | "01101111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0)); --Rn
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte;
+							RAM_READ_BYTE(xE0);
+							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- XRL A, direct
+				when "01100101" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte;
+							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- XRL A, @Ri
+				when "01100110" | "01100111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));	-- Compute and get Rn value
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_ram_doByte);							
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- XRL A, #data
+				when "01100100" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0);
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;				
+
+				--XRL direct, A
+				when "01100010" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_ram_doByte; -- Store AC value into DR
+							exe_state <= P1; 
+							cpu_state <= S3;
+						end case;
+	
+				--XRL direct, #data
+				when "01100011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S3;
+						end case;
+						
+				--END XRL -------------------------------------------------------------------------					
+
 
 				-- ADD A, Rn
 				when "00101000" | "00101001" | "00101010" | "00101011" | "00101100" | "00101101" | "00101110" | "00101111" =>
@@ -349,6 +517,8 @@ begin
 							cpu_state <= S4;
 							exe_state <= P1;
 					end case;							
+
+				--BEGIN ANL -------------------------------------------------------------------------					
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -437,6 +607,190 @@ begin
 							cpu_state <= S4;
 						end case;
 
+				--END ANL -------------------------------------------------------------------------					
+
+				--BEGIN ORL -------------------------------------------------------------------------					
+
+				-- ORL A, Rn
+				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
+					case exe_state is
+						when P1 =>
+							alu_src_2L <= i_ram_doByte;
+							alu_src_2H <= "00000000";	
+							alu_src_1L <= DR;
+							alu_src_1H <= "00000000";	
+							alu_op_code <= ALU_OPC_OR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte = <= alu_ans_L;
+							RAM_WRITE_BYTE(xE0);
+							
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				-- ORL A, direct
+				when "01000101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				-- ORL A, @Ri
+				when "01000110" | "01000111" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_ram_doByte; -- Save Rn in DR
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= S2;
+						
+						when P2 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_OR;
+
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- ORL A, #data
+				when "01000100" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				--ORL direct, A
+				when "01000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S4;
+						end case;
+
+				--ORL direct, #data
+				when "01000011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S4;
+						end case;
+
+				--END ORL -------------------------------------------------------------------------		
+
+
+				--BEGIN XRL -------------------------------------------------------------------------					
+
+				-- XRL A, Rn
+				when "01101000" | "01101001" | "01101010" | "01101011" | "01101100" | "01101101" | "01101110" | "01101111" =>
+					case exe_state is
+						when P1 =>
+							alu_src_2L <= i_ram_doByte;
+							alu_src_2H <= "00000000";	
+							alu_src_1L <= DR;
+							alu_src_1H <= "00000000";	
+							alu_op_code <= ALU_OPC_XOR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte = <= alu_ans_L;
+							RAM_WRITE_BYTE(xE0);
+							
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				-- XRL A, direct
+				when "01100101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				-- XRL A, @Ri
+				when "01100110" | "01100111" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_ram_doByte; -- Save Rn in DR
+							RAM_READ_BYTE(xE0); -- Get AC Value
+							exe_state <= S2;
+						
+						when P2 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_XOR;
+
+							exe_state <= P1;
+							cpu_state <= S3;
+						end case;
+
+				-- XRL A, #data
+				when "01100100" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S4;
+						end case;
+
+				--XRL direct, A
+				when "01100010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S4;
+						end case;
+
+				--XRL direct, #data
+				when "01100011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S4;
+						end case;
+
+				--END XRL -------------------------------------------------------------------------		
 
 				-- ADD A, Rn
 				when "00101000" | "00101001" | "00101010" | "00101011" | "00101100" | "00101101" | "00101110" | "00101111" =>
@@ -486,6 +840,8 @@ begin
 							cpu_state <= S5;
 							exe_state <= P1;
 					end case;
+
+				--BEGIN ANL -------------------------------------------------------------------------		
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -571,8 +927,183 @@ begin
 							cpu_state <= S5;
 						end case;
 
+				--END ANL -------------------------------------------------------------------------		
 
+				--BEGIN ORL -------------------------------------------------------------------------		
+				
+				-- ORL A, Rn
+				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S5;
+							exe_state <=P1;
+					end case;
+
+				-- ORL A, direct
+				when "01000101" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data); -- Get "direct" value
+
+							exe_state <= P1;
+							cpu_state <= S5;
+						end case;
+
+				-- ORL A, @Ri
+				when "01000110" | "01000111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S5;
+							exe_state <=P1;
+					end case;
+
+				-- ORL A, #data
+				when "01000100" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;
+							exe_state <= P2;
 	
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S5;
+						end case;
+	
+				--ORL direct, A
+				when "01000010" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;						
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data); -- Get "direct" value
+							AR <= i_rom_data;
+							exe_state <= P1; 
+							cpu_state <= S5;
+					end case;
+	
+				--ORL direct, #data
+				when "01000011" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;						
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data);	-- Get "direct" value
+							AR <= i_rom_data;	-- Store "direct" address in AR
+							ROM_READ(PC);		-- Get #data
+							PC <= PC + 1;
+							
+							exe_state <= P1; 
+							cpu_state <= S5;
+						end case;
+						
+				--END ORL -------------------------------------------------------------------------		
+
+
+				--BEGIN XRL -------------------------------------------------------------------------		
+				
+				-- XRL A, Rn
+				when "01101000" | "01101001" | "01101010" | "01101011" | "01101100" | "01101101" | "01101110" | "01101111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S5;
+							exe_state <=P1;
+					end case;
+
+				-- XRL A, direct
+				when "01100101" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data); -- Get "direct" value
+
+							exe_state <= P1;
+							cpu_state <= S5;
+						end case;
+
+				-- XRL A, @Ri
+				when "01100110" | "01100111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S5;
+							exe_state <=P1;
+					end case;
+
+				-- XRL A, #data
+				when "01100100" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;
+							exe_state <= P2;
+	
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S5;
+						end case;
+	
+				--XRL direct, A
+				when "01100010" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;						
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data); -- Get "direct" value
+							AR <= i_rom_data;
+							exe_state <= P1; 
+							cpu_state <= S5;
+					end case;
+	
+				--XRL direct, #data
+				when "01100011" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC); -- Get "direct" in next instruction
+							PC <= PC + 1;						
+							exe_state <= P2;
+						
+						when P2 =>
+							RAM_READ_BYTE(i_rom_data);	-- Get "direct" value
+							AR <= i_rom_data;	-- Store "direct" address in AR
+							ROM_READ(PC);		-- Get #data
+							PC <= PC + 1;
+							
+							exe_state <= P1; 
+							cpu_state <= S5;
+						end case;
+						
+				--END XRL -------------------------------------------------------------------------		
+
 				-- ADD A, Rn
 				when "00101000" | "00101001" | "00101010" | "00101011" | "00101100" | "00101101" | "00101110" | "00101111" =>
 					case exe_state is
@@ -610,6 +1141,9 @@ begin
 							cpu_state <= S6;
 							exe_state <= P1;
 					end case;
+
+				--BEGIN ANL -------------------------------------------------------------------------		
+
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -677,8 +1211,154 @@ begin
 							exe_state <= P1; 
 							cpu_state <= S6;
 					end case;
+				--END ANL -------------------------------------------------------------------------		
 
 
+
+				--BEGIN ORL -------------------------------------------------------------------------		
+
+
+				-- ORL A, Rn
+				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S6;
+							exe_state <=P1;
+					end case;
+
+				-- ORL A, direct
+				when "01000101" =>
+					case exe_state is
+						when P1 =>						
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S6;
+					end case;
+
+				-- ORL A, @Ri
+				when "01000110" | "01000111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S6;
+							exe_state <=P1;
+					end case;
+
+				-- ORL A, #data
+				when "01000100" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+	
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S6;
+						end case;
+
+				-- ORL direct, A
+				when "01000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S6;
+					end case;
+
+
+				-- ORL direct, #data
+				when "01000011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S6;
+					end case;
+				--END ORL -------------------------------------------------------------------------		
+
+
+
+
+				--BEGIN XRL -------------------------------------------------------------------------		
+
+
+				-- XRL A, Rn
+				when "01101000" | "01101001" | "01101010" | "01101011" | "01101100" | "01101101" | "01101110" | "01101111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S6;
+							exe_state <=P1;
+					end case;
+
+				-- XRL A, direct
+				when "01100101" =>
+					case exe_state is
+						when P1 =>						
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S6;
+					end case;
+
+				-- XRL A, @Ri
+				when "01100110" | "01100111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <=S6;
+							exe_state <=P1;
+					end case;
+
+				-- XRL A, #data
+				when "01100100" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+	
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <= S6;
+						end case;
+
+				-- XRL direct, A
+				when "01100010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S6;
+					end case;
+
+
+				-- XRL direct, #data
+				when "01100011" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1; 
+							cpu_state <= S6;
+					end case;
+				--END XRL -------------------------------------------------------------------------		
 
 
 				-- ADD A, Rn
@@ -719,6 +1399,9 @@ begin
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;
+
+				--BEGIN ANL -------------------------------------------------------------------------		
+
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -834,6 +1517,246 @@ begin
 							exe_state <= P1; 
 							cpu_state <= S1;
 					end case;
+
+				--END ANL -------------------------------------------------------------------------		
+
+				--BEGIN ORL -------------------------------------------------------------------------		
+
+				-- ORL A, Rn
+				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
+					case exe_state is
+						when P1 =>
+							RAM_WRITE_BYTE(xE0);
+							i_ram_diByte <= alu_ans_L;	
+							RESET_ALU;
+
+							exe_state <= P2;
+
+						when P2 =>							
+							cpu_state <=S1;
+							exe_state <=P1;
+					end case;
+
+				-- ORL A, direct
+				when "01000101" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_OR;
+						
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte = <= alu_ans_L;
+							RAM_WRITE_BYTE(xE0);						
+
+							exe_state <= P1;
+							cpu_state <= S1;
+					end case;
+					
+				-- ORL A, @Ri
+				when "01000110" | "01000111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <= S1;
+							exe_state <= P1;
+					end case;
+
+				-- ORL A, #data
+				when "01000100" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= i_rom_data;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_OR;
+							exe_state <= P2;
+	
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to AC
+							RAM_WRITE_BYTE(xE0);
+							
+							RESET_ALU;
+							exe_state <= P1;
+							cpu_state <= S1;
+						end case;
+
+				-- ORL direct, A
+				when "01000010" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_OR;
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to "direct"
+							RAM_WRITE_BYTE(AR);
+
+							RESET_ALU;
+							exe_state <= P1; 
+							cpu_state <= S1;
+					end case;
+
+				-- ORL direct, #data
+				when "01000011" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= i_rom_data;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_OR;
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to "direct"
+							RAM_WRITE_BYTE(AR);
+
+							RESET_ALU;
+
+							exe_state <= P1; 
+							cpu_state <= S1;
+					end case;
+				--END ORL -------------------------------------------------------------------------		
+
+
+				--BEGIN XRL -------------------------------------------------------------------------		
+
+				-- XRL A, Rn
+				when "01101000" | "01101001" | "01101010" | "01101011" | "01101100" | "01101101" | "01101110" | "01101111" =>
+					case exe_state is
+						when P1 =>
+							RAM_WRITE_BYTE(xE0);
+							i_ram_diByte <= alu_ans_L;	
+							RESET_ALU;
+
+							exe_state <= P2;
+
+						when P2 =>							
+							cpu_state <=S1;
+							exe_state <=P1;
+					end case;
+
+				-- XRL A, direct
+				when "01100101" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_XOR;
+						
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte = <= alu_ans_L;
+							RAM_WRITE_BYTE(xE0);						
+
+							exe_state <= P1;
+							cpu_state <= S1;
+					end case;
+					
+				-- XRL A, @Ri
+				when "01100110" | "01100111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+							
+						when P2 =>
+							cpu_state <= S1;
+							exe_state <= P1;
+					end case;
+
+				-- XRL A, #data
+				when "01100100" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= i_rom_data;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_XOR;
+							exe_state <= P2;
+	
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to AC
+							RAM_WRITE_BYTE(xE0);
+							
+							RESET_ALU;
+							exe_state <= P1;
+							cpu_state <= S1;
+						end case;
+
+				-- XRL direct, A
+				when "01100010" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= DR;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_XOR;
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to "direct"
+							RAM_WRITE_BYTE(AR);
+
+							RESET_ALU;
+							exe_state <= P1; 
+							cpu_state <= S1;
+					end case;
+
+				-- XRL direct, #data
+				when "01100011" =>
+					case exe_state is
+						when P1 =>
+							alu_src_1H <= "00000000";	-- Perform AND operation
+							alu_src_1L <= i_ram_doByte;
+							alu_src_2H <= "00000000";
+							alu_src_2L <= i_rom_data;
+							alu_by_wd <= '0';
+							alu_cy_bw <= '0';
+							alu_op_code <= ALU_OPC_X0R;
+							exe_state <= P2;
+						
+						when P2 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to "direct"
+							RAM_WRITE_BYTE(AR);
+
+							RESET_ALU;
+
+							exe_state <= P1; 
+							cpu_state <= S1;
+					end case;
+				
+				--END XRL -------------------------------------------------------------------------		
 
 
 				-- ADD A, Rn
