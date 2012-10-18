@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="info" file="LIT" num="243" delta="new" >Logical network <arg fmt="%s" index="1">ea</arg> has no load.
+</msg>
+
+<msg type="info" file="MapLib" num="562" delta="new" >No environment variables are currently set.
+</msg>
+
+<msg type="info" file="LIT" num="244" delta="new" >All of the single ended outputs in this design are using slew rate limited output drivers. The delay on speed critical single ended outputs can be dramatically reduced by designating them as fast outputs.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="372" delta="new" >Gated clock. Clock net <arg fmt="%s" index="1">RAM/Mtrien_doBit_not0001</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="372" delta="new" >Gated clock. Clock net <arg fmt="%s" index="1">RAM/Mtrien_doByte_not0001</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA0</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00001</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA1</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00001</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA2</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00001</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA3</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00001</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA0</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00002</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA1</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00002</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA2</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00002</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+<msg type="warning" file="PhysDesignRules" num="812" delta="new" >Dangling pin &lt;<arg fmt="%s" index="1">DIA3</arg>&gt; on block:&lt;<arg fmt="%s" index="2">ROM/Mrom_data_rom00002</arg>&gt;:&lt;<arg fmt="%s" index="3">RAMB16BWE_RAMB16BWE</arg>&gt;.
+</msg>
+
+</messages>
+

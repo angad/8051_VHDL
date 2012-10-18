@@ -1,0 +1,64 @@
+Release 14.2 - xst P.28xd (nt)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> Parameter xsthdpdir set to C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/constants.vhd" in Library work.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ext_interrupt.vhd" in Library work.
+Architecture behavioral of Entity ext_interrupt is up to date.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/csadder.vhd" in Library work.
+Architecture csadderbeh of Entity csadder is up to date.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/sequencer2.vhd" in Library work.
+Entity <sequencer2> compiled.
+Entity <sequencer2> (Architecture <seq_arch>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/fastalu.vhd" in Library work.
+Entity <fastalu> compiled.
+Entity <fastalu> (Architecture <fastalu_arch>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/regfile.vhd" in Library work.
+Entity <regfile> compiled.
+Entity <regfile> (Architecture <regarch>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/multiplier.vhd" in Library work.
+Entity <multiplier> compiled.
+Entity <multiplier> (Architecture <rtl>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_rom.vhd" in Library work.
+Entity <int_rom> compiled.
+Entity <int_rom> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_ram.vhd" in Library work.
+Entity <internal_ram> compiled.
+Entity <internal_ram> (Architecture <syn>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/divider.vhd" in Library work.
+Entity <divider> compiled.
+Entity <divider> (Architecture <rtl>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_handler.vhd" in Library work.
+Entity <int_handler> compiled.
+Entity <int_handler> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/8051_top_fpga.vhd" in Library work.
+Entity <i8051_top> compiled.
+Entity <i8051_top> (Architecture <Behavioral>) compiled.
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.32 secs
+ 
+--> 
+
+Total memory usage is 167256 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

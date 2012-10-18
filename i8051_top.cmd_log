@@ -1,0 +1,4 @@
+xst -intstyle ise -ifn "C:/Users/u0909118/Documents/SAA/Lab1/i8051_top.xst" -ofn "C:/Users/u0909118/Documents/SAA/Lab1/i8051_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc3s400a-ft256-4 i8051_top.ngc i8051_top.ngd  
+map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off -c 100 -o i8051_top_map.ncd i8051_top.ngd i8051_top.pcf 
+par -w -intstyle ise -ol high -t 1 i8051_top_map.ncd i8051_top.ncd i8051_top.pcf 

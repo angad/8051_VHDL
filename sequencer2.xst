@@ -1,0 +1,5 @@
+set -tmpdir "D:/SAA/Lab1/xst/projnav.tmp"
+set -xsthdpdir "D:/SAA/Lab1/xst"
+elaborate
+-ifn sequencer2.prj
+-ifmt mixed

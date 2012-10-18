@@ -1,0 +1,100 @@
+Release 13.2 Map O.61xd (nt)
+Xilinx Map Application Log File for Design 'i8051_top'
+
+Design Information
+------------------
+Command Line   : map -intstyle ise -p xc3s400a-ft256-4 -cm area -ir off -pr off
+-c 100 -o i8051_top_map.ncd i8051_top.ngd i8051_top.pcf 
+Target Device  : xc3s400a
+Target Package : ft256
+Target Speed   : -4
+Mapper Version : spartan3a -- $Revision: 1.55 $
+Mapped Date    : Wed Oct 17 10:27:18 2012
+
+vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+INFO:Security:54 - 'xc3s400a' is a WebPack part.
+WARNING:Security:42 - Your software subscription period has lapsed. Your current
+version of Xilinx tools will continue to function, but you no longer qualify for
+Xilinx software updates or new releases.
+----------------------------------------------------------------------
+Mapping design into LUTs...
+Running directed packing...
+Running delay-based LUT packing...
+Running related packing...
+Updating timing models...
+WARNING:PhysDesignRules:372 - Gated clock. Clock net RAM/Mtrien_doBit_not0001 is
+   sourced by a combinatorial pin. This is not good design practice. Use the CE
+   pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net RAM/Mtrien_doByte_not0001
+   is sourced by a combinatorial pin. This is not good design practice. Use the
+   CE pin to control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA0> on
+   block:<ROM/Mrom_data_rom00001>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA1> on
+   block:<ROM/Mrom_data_rom00001>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA2> on
+   block:<ROM/Mrom_data_rom00001>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA3> on
+   block:<ROM/Mrom_data_rom00001>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA0> on
+   block:<ROM/Mrom_data_rom00002>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA1> on
+   block:<ROM/Mrom_data_rom00002>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA2> on
+   block:<ROM/Mrom_data_rom00002>:<RAMB16BWE_RAMB16BWE>.
+WARNING:PhysDesignRules:812 - Dangling pin <DIA3> on
+   block:<ROM/Mrom_data_rom00002>:<RAMB16BWE_RAMB16BWE>.
+
+Design Summary
+--------------
+
+Design Summary:
+Number of errors:      0
+Number of warnings:   10
+Logic Utilization:
+  Total Number Slice Registers:       1,350 out of   7,168   18%
+    Number used as Flip Flops:        1,328
+    Number used as Latches:              22
+  Number of 4 input LUTs:             2,285 out of   7,168   31%
+Logic Distribution:
+  Number of occupied Slices:          1,776 out of   3,584   49%
+    Number of Slices containing only related logic:   1,776 out of   1,776 100%
+    Number of Slices containing unrelated logic:          0 out of   1,776   0%
+      *See NOTES below for an explanation of the effects of unrelated logic.
+  Total Number of 4 input LUTs:       2,322 out of   7,168   32%
+    Number used as logic:             2,285
+    Number used as a route-thru:         37
+
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+  Number of bonded IOBs:                 84 out of     195   43%
+  Number of BUFGMUXs:                     2 out of      24    8%
+  Number of RAMB16BWEs:                   2 out of      20   10%
+
+Average Fanout of Non-Clock Nets:                3.79
+
+Peak Memory Usage:  202 MB
+Total REAL time to MAP completion:  8 secs 
+Total CPU time to MAP completion:   4 secs 
+
+NOTES:
+
+   Related logic is defined as being logic that shares connectivity - e.g. two
+   LUTs are "related" if they share common inputs.  When assembling slices,
+   Map gives priority to combine logic that is related.  Doing so results in
+   the best timing performance.
+
+   Unrelated logic shares no connectivity.  Map will only begin packing
+   unrelated logic into a slice once 99% of the slices are occupied through
+   related logic packing.
+
+   Note that once logic distribution reaches the 99% level through related
+   logic packing, this does not mean the device is completely utilized.
+   Unrelated logic packing will then begin, continuing until all usable LUTs
+   and FFs are occupied.  Depending on your timing budget, increased levels of
+   unrelated logic packing may adversely affect the overall timing performance
+   of your design.
+
+Mapping completed.
+See MAP report file "i8051_top_map.mrp" for details.

@@ -1,0 +1,46 @@
+Running: C:\Xilinx\14.2\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -o C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.exe -prj C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_beh.prj work.ADD 
+ISim P.28xd (signature 0x1048c146)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ext_interrupt.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/csadder.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/constants.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/sequencer2.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/regfile.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/multiplier.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_rom.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_ram.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_handler.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/fastalu.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/divider.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/8051_top_fpga.vhd" into library work
+Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 103888 KB
+Fuse CPU Usage: 327 ms
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package std_logic_arith
+Compiling package std_logic_unsigned
+Compiling package constants
+Compiling architecture seq_arch of entity sequencer2 [sequencer2_default]
+Compiling package std_logic_signed
+Compiling architecture csadderbeh of entity csadder [csadder_default]
+Compiling architecture fastalu_arch of entity fastalu [fastalu_default]
+Compiling architecture behavioral of entity ext_interrupt [ext_interrupt_default]
+Compiling architecture regarch of entity regfile [regfile_default]
+Compiling architecture rtl of entity multiplier [\multiplier(16)\]
+Compiling architecture behavioral of entity int_rom [int_rom_default]
+Compiling architecture syn of entity internal_ram [internal_ram_default]
+Compiling architecture rtl of entity divider [divider_default]
+Compiling architecture behavioral of entity int_handler [int_handler_default]
+Compiling architecture behavioral of entity i8051_top [i8051_top_default]
+Compiling architecture behavior of entity add
+Time Resolution for simulation is 1ps.
+Waiting for 10 sub-compilation(s) to finish...
+Compiled 29 VHDL Units
+Built simulation executable C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.exe
+Fuse Memory Usage: 125308 KB
+Fuse CPU Usage: 718 ms

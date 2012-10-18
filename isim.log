@@ -1,0 +1,36 @@
+ISim log file
+Running: C:\Users\Angad Singh\Downloads\1 Trying S1S6\Lab1\ADD_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.wdb 
+ISim P.28xd (signature 0x1048c146)
+----------------------------------------------------------------------
+INFO:Security:61 - The XILINXD_LICENSE_FILE environment variable is not set.
+INFO:Security:63 - The LM_LICENSE_FILE environment variable is not set.
+INFO:Security:68 - For more information or for assistance in obtaining 
+ a license, please run the Xilinx License Configuration Manager
+       (xlcm or "Manage Xilinx Licenses".)
+INFO:Security:68a - user is Angad Singh, on host ANGADSINGH-PC.
+ERROR:Security:14 - No feature was available for 'ISIM'.
+
+No such feature exists.
+Feature:       ISIM
+License path:  C:/.Xilinx\Xilinx.lic;C:\Xilinx\14.2\ISE_DS\ISE\/coregen/core_licenses\Xilinx.lic;C:\Xilinx\14.2\ISE_DS\ISE\/coregen/core_licenses\XilinxFree.lic;C:\Xilinx\14.2\ISE_DS\EDK/data/core_licenses\Xilinx.lic;
+FLEXnet Licensing error:-5,357
+For further information, refer to the FLEXnet Licensing documentation,
+available at "www.acresso.com".
+----------------------------------------------------------------------
+WARNING: A full ISim License cannot be checked out due to the issues listed above. Please use Xilinx License Configuration Manager to fix these issues in order to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /add/uut/MUL/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+at 0 ps, Instance /add/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+Finished circuit initialization process.
+# restart
+# run all
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /add/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
+Finished circuit initialization process.
+Stopped at time : 443443355 ns : File "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD.vhd" Line 108

@@ -1,0 +1,5 @@
+set -tmpdir "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/xst/projnav.tmp"
+set -xsthdpdir "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/xst"
+elaborate
+-ifn i8051_top.prj
+-ifmt mixed

@@ -1,0 +1,34 @@
+Release 13.2 ngdbuild O.61xd (nt)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+Command Line: C:\Xilinx\13.2\ISE_DS\ISE\bin\nt\unwrapped\ngdbuild.exe -intstyle
+ise -dd _ngo -nt timestamp -i -p xc3s400a-ft256-4 i8051_top.ngc i8051_top.ngd
+
+Reading NGO file "C:/Users/u0909118/Documents/SAA/Lab1/i8051_top.ngc" ...
+Gathering constraint information from source properties...
+Done.
+
+Resolving constraint associations...
+Checking Constraint Associations...
+Done...
+
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   0
+
+Total memory usage is 113212 kilobytes
+
+Writing NGD file "i8051_top.ngd" ...
+Total REAL time to NGDBUILD completion:  4 sec
+Total CPU time to NGDBUILD completion:   3 sec
+
+Writing NGDBUILD log file "i8051_top.bld"...

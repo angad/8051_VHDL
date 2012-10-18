@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="Lab1.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_LSO" xil_pn:name=".lso"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ADD_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="ADD_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="ADD_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ADD_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i8051_top.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="i8051_top.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="i8051_top.xst"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1350457677" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1350457677">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457773" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350457773">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="8051_top_fpga.vhd"/>
+      <outfile xil_pn:name="ADD.vhd"/>
+      <outfile xil_pn:name="constants.vhd"/>
+      <outfile xil_pn:name="csadder.vhd"/>
+      <outfile xil_pn:name="divider.vhd"/>
+      <outfile xil_pn:name="ext_interrupt.vhd"/>
+      <outfile xil_pn:name="fastalu.vhd"/>
+      <outfile xil_pn:name="int_handler.vhd"/>
+      <outfile xil_pn:name="int_ram.vhd"/>
+      <outfile xil_pn:name="int_rom.vhd"/>
+      <outfile xil_pn:name="multiplier.vhd"/>
+      <outfile xil_pn:name="regfile.vhd"/>
+      <outfile xil_pn:name="sequencer2.vhd"/>
+      <outfile xil_pn:name="testLab1.vhd"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457776" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="3544659590482521471" xil_pn:start_ts="1350457776">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457776" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="77932533579046183" xil_pn:start_ts="1350457776">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457678" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="3428645901861359232" xil_pn:start_ts="1350457678">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457776" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350457776">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="8051_top_fpga.vhd"/>
+      <outfile xil_pn:name="ADD.vhd"/>
+      <outfile xil_pn:name="constants.vhd"/>
+      <outfile xil_pn:name="csadder.vhd"/>
+      <outfile xil_pn:name="divider.vhd"/>
+      <outfile xil_pn:name="ext_interrupt.vhd"/>
+      <outfile xil_pn:name="fastalu.vhd"/>
+      <outfile xil_pn:name="int_handler.vhd"/>
+      <outfile xil_pn:name="int_ram.vhd"/>
+      <outfile xil_pn:name="int_rom.vhd"/>
+      <outfile xil_pn:name="multiplier.vhd"/>
+      <outfile xil_pn:name="regfile.vhd"/>
+      <outfile xil_pn:name="sequencer2.vhd"/>
+      <outfile xil_pn:name="testLab1.vhd"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457780" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="5602170803220106460" xil_pn:start_ts="1350457776">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="ADD_beh.prj"/>
+      <outfile xil_pn:name="ADD_isim_beh.exe"/>
+      <outfile xil_pn:name="fuse.log"/>
+      <outfile xil_pn:name="isim"/>
+      <outfile xil_pn:name="isim.log"/>
+      <outfile xil_pn:name="xilinxsim.ini"/>
+    </transform>
+    <transform xil_pn:end_ts="1350457780" xil_pn:in_ck="-7549958460870546376" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8407914104265854121" xil_pn:start_ts="1350457780">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutputChanged"/>
+      <outfile xil_pn:name="ADD_isim_beh.wdb"/>
+      <outfile xil_pn:name="isim.cmd"/>
+      <outfile xil_pn:name="isim.log"/>
+    </transform>
+  </transforms>
+
+</generated_project>
