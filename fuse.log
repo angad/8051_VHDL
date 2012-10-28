@@ -1,4 +1,4 @@
-Running: C:\Xilinx\14.2\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -o C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.exe -prj C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_beh.prj work.ADD 
+Running: C:\Xilinx\14.2\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -o C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.exe -prj C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_beh.prj ADD 
 ISim P.28xd (signature 0x1048c146)
 Number of CPUs detected in this system: 4
 Turning on mult-threading, number of parallel sub-compilation jobs: 8 
@@ -18,8 +18,8 @@ Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/8051_top_fp
 Parsing VHDL file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD.vhd" into library work
 Starting static elaboration
 Completed static elaboration
-Fuse Memory Usage: 103888 KB
-Fuse CPU Usage: 327 ms
+Fuse Memory Usage: 110552 KB
+Fuse CPU Usage: 374 ms
 Compiling package standard
 Compiling package std_logic_1164
 Compiling package std_logic_arith
@@ -39,8 +39,8 @@ Compiling architecture behavioral of entity int_handler [int_handler_default]
 Compiling architecture behavioral of entity i8051_top [i8051_top_default]
 Compiling architecture behavior of entity add
 Time Resolution for simulation is 1ps.
-Waiting for 10 sub-compilation(s) to finish...
+Waiting for 5 sub-compilation(s) to finish...
 Compiled 29 VHDL Units
 Built simulation executable C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD_isim_beh.exe
-Fuse Memory Usage: 125308 KB
-Fuse CPU Usage: 718 ms
+Fuse Memory Usage: 130948 KB
+Fuse CPU Usage: 859 ms

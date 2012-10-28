@@ -21,6 +21,7 @@ architecture Behavioral of int_rom is
 	--3rd Oct
 -- "00000011", --RR A (Rotate ACC Right)
 	"00101000", -- ADD A, Rn
+	"01011000", -- ANL A, Rn	
 
 --	"00010011", --RRC A (Rotate ACC right through carry flag)
 -- "00100011", --RL A (Rotate ACC Left)

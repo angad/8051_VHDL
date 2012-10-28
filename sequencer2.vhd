@@ -187,11 +187,12 @@ begin
 					RAM_READ_BYTE(xD0); --PSW
 					exe_state <= P2;
 				
-				when P2 =>
-					IR <= i_rom_data;
-					PC <= PC + 1;
-					
+				when P2 =>					
 					AR <= i_ram_doByte; --put PSW into AR
+					if(AR(1) = '0') then 
+						IR <= i_rom_data;
+					end if;
+					PC <= PC + 1;
 					cpu_state <= S2;
 					exe_state <= P1;
 					
@@ -229,7 +230,7 @@ begin
 				--BEGIN ANL -------------------------------------------------------------------------					
 
 
-				-- ANL A, Rn
+				-- ANL A, Rn -- Tested, Simulated
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
 					case exe_state is
 						when P1 =>
@@ -341,7 +342,7 @@ begin
 						end case;
 
 				-- ORL A, @Ri
-				when "01000110" | "01000111" =>
+				when "01000110" | "01000111" =>	
 					case exe_state is
 						when P1 =>
 							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));	-- Compute and get Rn value
@@ -535,7 +536,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);
 							
 							exe_state <= P1;
@@ -559,7 +560,7 @@ begin
 						when P1 =>
 							DR <= i_ram_doByte; -- Save Rn in DR
 							RAM_READ_BYTE(xE0); -- Get AC Value
-							exe_state <= S2;
+							exe_state <= P2;
 						
 						when P2 =>
 							alu_src_1H <= "00000000";	-- Perform AND operation
@@ -626,7 +627,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);
 							
 							exe_state <= P1;
@@ -650,7 +651,7 @@ begin
 						when P1 =>
 							DR <= i_ram_doByte; -- Save Rn in DR
 							RAM_READ_BYTE(xE0); -- Get AC Value
-							exe_state <= S2;
+							exe_state <= P2;
 						
 						when P2 =>
 							alu_src_1H <= "00000000";	-- Perform AND operation
@@ -718,7 +719,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);
 							
 							exe_state <= P1;
@@ -742,7 +743,7 @@ begin
 						when P1 =>
 							DR <= i_ram_doByte; -- Save Rn in DR
 							RAM_READ_BYTE(xE0); -- Get AC Value
-							exe_state <= S2;
+							exe_state <= P2;
 						
 						when P2 =>
 							alu_src_1H <= "00000000";	-- Perform AND operation
@@ -1433,7 +1434,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);						
 
 							exe_state <= P1;
@@ -1552,7 +1553,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);						
 
 							exe_state <= P1;
@@ -1671,7 +1672,7 @@ begin
 							exe_state <= P2;
 						
 						when P2 =>
-							i_ram_diByte = <= alu_ans_L;
+							i_ram_diByte <= alu_ans_L;
 							RAM_WRITE_BYTE(xE0);						
 
 							exe_state <= P1;
@@ -1743,7 +1744,7 @@ begin
 							alu_src_2L <= i_rom_data;
 							alu_by_wd <= '0';
 							alu_cy_bw <= '0';
-							alu_op_code <= ALU_OPC_X0R;
+							alu_op_code <= ALU_OPC_XOR;
 							exe_state <= P2;
 						
 						when P2 =>

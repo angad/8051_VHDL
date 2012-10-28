@@ -32,9 +32,13 @@
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="i8051_top.prj"/>
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="i8051_top.stx"/>
     <file xil_pn:fileType="FILE_XST" xil_pn:name="i8051_top.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="int_rom_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="int_rom_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="testLab1_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="testLab1_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_INI" xil_pn:name="xilinxsim.ini"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
   </files>
@@ -44,7 +48,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350457773" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350457773">
+    <transform xil_pn:end_ts="1350609834" xil_pn:in_ck="-6939075992460281815" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1350609834">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="8051_top_fpga.vhd"/>
@@ -60,13 +64,14 @@
       <outfile xil_pn:name="multiplier.vhd"/>
       <outfile xil_pn:name="regfile.vhd"/>
       <outfile xil_pn:name="sequencer2.vhd"/>
+      <outfile xil_pn:name="test.vhd"/>
       <outfile xil_pn:name="testLab1.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1350457776" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="3544659590482521471" xil_pn:start_ts="1350457776">
+    <transform xil_pn:end_ts="1350609858" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="3544659590482521471" xil_pn:start_ts="1350609858">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350457776" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="77932533579046183" xil_pn:start_ts="1350457776">
+    <transform xil_pn:end_ts="1350609858" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="77932533579046183" xil_pn:start_ts="1350609858">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
@@ -74,7 +79,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1350457776" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350457776">
+    <transform xil_pn:end_ts="1350609837" xil_pn:in_ck="-6939075992460281815" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1350609837">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="8051_top_fpga.vhd"/>
@@ -90,9 +95,10 @@
       <outfile xil_pn:name="multiplier.vhd"/>
       <outfile xil_pn:name="regfile.vhd"/>
       <outfile xil_pn:name="sequencer2.vhd"/>
+      <outfile xil_pn:name="test.vhd"/>
       <outfile xil_pn:name="testLab1.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1350457780" xil_pn:in_ck="3463316178540585241" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="5602170803220106460" xil_pn:start_ts="1350457776">
+    <transform xil_pn:end_ts="1350609862" xil_pn:in_ck="-6939075992460281815" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="5602170803220106460" xil_pn:start_ts="1350609858">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
@@ -104,7 +110,7 @@
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1350457780" xil_pn:in_ck="-7549958460870546376" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8407914104265854121" xil_pn:start_ts="1350457780">
+    <transform xil_pn:end_ts="1350609862" xil_pn:in_ck="-1083168974073662898" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8407914104265854121" xil_pn:start_ts="1350609862">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>

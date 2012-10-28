@@ -4,13 +4,13 @@ Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.11 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Parameter xsthdpdir set to C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.11 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
 
@@ -26,37 +26,31 @@ Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/sequencer
 Entity <sequencer2> compiled.
 Entity <sequencer2> (Architecture <seq_arch>) compiled.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/fastalu.vhd" in Library work.
-Entity <fastalu> compiled.
-Entity <fastalu> (Architecture <fastalu_arch>) compiled.
+Architecture fastalu_arch of Entity fastalu is up to date.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/regfile.vhd" in Library work.
-Entity <regfile> compiled.
-Entity <regfile> (Architecture <regarch>) compiled.
+Architecture regarch of Entity regfile is up to date.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/multiplier.vhd" in Library work.
-Entity <multiplier> compiled.
-Entity <multiplier> (Architecture <rtl>) compiled.
+Architecture rtl of Entity multiplier is up to date.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_rom.vhd" in Library work.
 Entity <int_rom> compiled.
-Entity <int_rom> (Architecture <Behavioral>) compiled.
+Entity <int_rom> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_ram.vhd" in Library work.
 Entity <internal_ram> compiled.
 Entity <internal_ram> (Architecture <syn>) compiled.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/divider.vhd" in Library work.
-Entity <divider> compiled.
-Entity <divider> (Architecture <rtl>) compiled.
+Architecture rtl of Entity divider is up to date.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/int_handler.vhd" in Library work.
-Entity <int_handler> compiled.
-Entity <int_handler> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity int_handler is up to date.
 Compiling vhdl file "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/8051_top_fpga.vhd" in Library work.
-Entity <i8051_top> compiled.
-Entity <i8051_top> (Architecture <Behavioral>) compiled.
+Architecture behavioral of Entity i8051_top is up to date.
 
 
 Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.32 secs
+Total CPU time to Xst completion: 0.22 secs
  
 --> 
 
-Total memory usage is 167256 kilobytes
+Total memory usage is 172896 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    1 (   0 filtered)

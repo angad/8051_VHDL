@@ -33,4 +33,4 @@ Finished circuit initialization process.
 Simulator is doing circuit initialization process.
 at 0 ps, Instance /add/uut/DIV/ : Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
 Finished circuit initialization process.
-Stopped at time : 443443355 ns : File "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/ADD.vhd" Line 108
+Stopped at time : 346979750 ns : File "C:/Users/Angad Singh/Downloads/1 Trying S1S6/Lab1/8051_top_fpga.vhd" Line 242
