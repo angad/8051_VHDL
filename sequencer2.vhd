@@ -175,11 +175,6 @@ begin
 
 -- Angad
 
--- ADD A, Rn
--- NOP 
--- MOV A, Rn
-
-
 		when S1 => -- Fetch
 			case exe_state is
 				when P1 =>
@@ -198,7 +193,6 @@ begin
 					
 			end case; -- exe_state (FETCH)
 			
-		
 		when S2 => -- Decode
 			case IR is
 			
@@ -245,7 +239,7 @@ begin
 							cpu_state <= S3;
 						end case;
 
-				-- ANL A, direct
+				-- ANL A, direct -- Tested, Simulated
 				when "01010101" =>
 					case exe_state is
 						when P1 =>
@@ -259,7 +253,7 @@ begin
 							cpu_state <= S3;
 						end case;
 
-				-- ANL A, @Ri
+				-- ANL A, @Ri -- Tested, Simulated
 				when "01010110" | "01010111" =>
 					case exe_state is
 						when P1 =>
@@ -272,7 +266,7 @@ begin
 							cpu_state <= S3;
 						end case;
 
-				-- ANL A, #data
+				-- ANL A, #data  -- Tested, Simulated
 				when "01010100" =>
 					case exe_state is
 						when P1 =>
@@ -282,7 +276,7 @@ begin
 						when P2 =>
 							exe_state <= P1;
 							cpu_state <= S3;
-						end case;				
+						end case;
 
 				-- ANL direct, A
 				when "01010010" =>
@@ -312,7 +306,7 @@ begin
 				--BEGIN ORL -------------------------------------------------------------------------					
 
 
-				-- ORL A, Rn
+				-- ORL A, Rn -- Tested, Simulated
 				when "01001000" | "01001001" | "01001010" | "01001011" | "01001100" | "01001101" | "01001110" | "01001111" =>
 					case exe_state is
 						when P1 =>
@@ -327,7 +321,7 @@ begin
 							cpu_state <= S3;
 						end case;
 
-				-- ORL A, direct
+				-- ORL A, direct -- Tested Simulated
 				when "01000101" =>
 					case exe_state is
 						when P1 =>
@@ -572,7 +566,7 @@ begin
 							alu_op_code <= ALU_OPC_AND;
 
 							exe_state <= P1;
-							cpu_state <= S3;
+							cpu_state <= S4;
 						end case;
 
 				-- ANL A, #data
@@ -663,7 +657,7 @@ begin
 							alu_op_code <= ALU_OPC_OR;
 
 							exe_state <= P1;
-							cpu_state <= S3;
+							cpu_state <= S4;
 						end case;
 
 				-- ORL A, #data
@@ -755,7 +749,7 @@ begin
 							alu_op_code <= ALU_OPC_XOR;
 
 							exe_state <= P1;
-							cpu_state <= S3;
+							cpu_state <= S4;
 						end case;
 
 				-- XRL A, #data
@@ -1445,9 +1439,13 @@ begin
 				when "01010110" | "01010111" =>
 					case exe_state is
 						when P1 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to AC
+							RAM_WRITE_BYTE(xE0);
+
 							exe_state <= P2;
 							
 						when P2 =>
+							RESET_ALU;
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;
@@ -1564,9 +1562,13 @@ begin
 				when "01000110" | "01000111" =>
 					case exe_state is
 						when P1 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to AC
+							RAM_WRITE_BYTE(xE0);
+
 							exe_state <= P2;
 							
 						when P2 =>
+							RESET_ALU;
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;
@@ -1683,9 +1685,13 @@ begin
 				when "01100110" | "01100111" =>
 					case exe_state is
 						when P1 =>
+							i_ram_diByte <= alu_ans_L;	-- Write result to AC
+							RAM_WRITE_BYTE(xE0);
+
 							exe_state <= P2;
 							
 						when P2 =>
+							RESET_ALU;
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;

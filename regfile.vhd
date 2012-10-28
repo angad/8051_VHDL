@@ -71,6 +71,7 @@ end component;
 	signal TL1	:	std_logic_vector(7 downto 0);
 	signal TMOD	:	std_logic_vector(7 downto 0);
 	signal P3	:	std_logic_vector(7 downto 0);
+	--signal SCRATCH: std_logic_vector(7 downto 0);
 
 begin
 
@@ -92,7 +93,8 @@ port map
 begin
 	--TCON <= TCON_temp; 
 	if (rst = '1') then
-		ACC    <= "00000011";
+		ACC    <= "00111010";
+		--SCRATCH <= "00000001";
             B      <= "00000000";
             DPH    <= "00000000";
             DPL    <= "00000000";
@@ -119,7 +121,8 @@ begin
   
 	elsif (rdByte = '1') then
 		case addr is
-				when xE0   => doByte <= ACC; 
+				when xE0   => doByte <= ACC;
+				--when x7F   => doByte <= SCRATCH; --angad
 				when xF0   => doByte <= B;	   
 				when x83   => doByte <= DPH; 
 				when x82   => doByte <= DPL;	

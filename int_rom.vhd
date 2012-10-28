@@ -20,9 +20,35 @@ architecture Behavioral of int_rom is
 
 	--3rd Oct
 -- "00000011", --RR A (Rotate ACC Right)
-	"00101000", -- ADD A, Rn
-	"01011000", -- ANL A, Rn	
 
+
+--	"01011000", -- ANL A, Rn
+--	"01001000", -- ORL A, Rn
+--	"01101000", -- XRL A, Rn
+
+--	"01010101",	-- ANL A, direct
+--	"00111111", --x3f address
+	
+--	"01000101", -- ORL A, direct
+--	"00111111", --x3f address
+	
+--	"01100101", -- XRL A, direct
+--	"00111111", --x3f address
+
+--	"01010110", -- ANL A, @Ri
+--	"01100110", -- XRL A, @Ri
+--	"01000110", -- ORL A, @Ri
+
+-- "01010100", -- ANL, A, #data
+--	"00001010", -- #data
+	
+-- "01000100", -- ORL, A, #data
+--	"00001010", -- #data
+
+-- "01100100", -- XRL, A, #data
+--	"00001010", -- #data
+
+	
 --	"00010011", --RRC A (Rotate ACC right through carry flag)
 -- "00100011", --RL A (Rotate ACC Left)
 

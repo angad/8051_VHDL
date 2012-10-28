@@ -34,9 +34,11 @@ process (clk, rst, rdByte, rdBit, addr)
 		for i in 1 to 127 loop
 			RAM(i) <= "00000000";
 		end loop;
-		RAM(0) <= "00000011";
+		RAM(0) <= "00111111";
 		doByte <= "ZZZZZZZZ";
 		doBit <= 'Z';
+		-- testing direct addressing
+		RAM(63) <= "00001111";
 
 	elsif (rdByte = '1') then
 		if (addr(7) = '0') then

@@ -1,0 +1,2 @@
+vhdl isim_temp "constants.vhd"
+vhdl isim_temp "sequencer2.vhd"
