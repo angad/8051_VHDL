@@ -65,7 +65,7 @@ end sequencer2;
 
 architecture seq_arch of sequencer2 is
 
-    type t_cpu_state is (S1,S2,S3,S4,S5,S6); -- FETCH / DECODE / EXECUTE
+    type t_cpu_state is (S1,S2,S3,S4,S5,S6,S7,S8,S9,S10,S11,S12); -- FETCH / DECODE / EXECUTE
     type t_exe_state is (P1,P2); 
     
 	signal cpu_state 		: t_cpu_state;
@@ -182,15 +182,12 @@ begin
 					RAM_READ_BYTE(xD0); --PSW
 					exe_state <= P2;
 				
-				when P2 =>					
-					AR <= i_ram_doByte; --put PSW into AR
-					if(AR(1) = '0') then 
-						IR <= i_rom_data;
-					end if;
+				when P2 =>	
+					AR <= i_ram_doByte;
+					IR <= i_rom_data;
 					PC <= PC + 1;
 					cpu_state <= S2;
-					exe_state <= P1;
-					
+					exe_state <= P1;					
 			end case; -- exe_state (FETCH)
 			
 		when S2 => -- Decode
@@ -216,6 +213,17 @@ begin
 						
 						when P2 =>
 							DR <= i_ram_doByte;
+							cpu_state <= S3;
+							exe_state <= P1;
+					end case;
+					
+				-- MOV Rn, #value 
+				when "01111000" | "01111001" | "01111010" | "01111011" | "01111100" | "01111101" | "01111110" | "01111111" =>
+					case exe_state is 
+						when P1 => 
+							RAM_READ_BYTE(xD0);
+							exe_state <= P2;
+						when P2 =>
 							cpu_state <= S3;
 							exe_state <= P1;
 					end case;
@@ -482,9 +490,59 @@ begin
 							exe_state <= P1;
 					end case; --exe_state Decode
 				
+				-- 31st OCT
+				
+				--DJNZ Rn,rel
+				when "11011000" | "11011001" | "11011010" | "11011011" | "11011100" | "11011101" | "11011110" | "11011111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0)); --Rn
+							AR <= "000" & i_ram_doByte(4 downto 3) & IR(2 downto 0);
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S3;
+					end case;
+	
+				
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S3;
+					end case;
+				
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S3;
+					end case;
+
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S3;
+					end case;
+
+				
 				when others =>
 			end case; --IR
-		
+		----------------------------------------------------------------------------------------------------------------------------------
 		when S3 => -- Execute
 			case IR is
 
@@ -512,8 +570,18 @@ begin
 							cpu_state <= S4;
 							exe_state <= P1;
 					end case;							
+					
+				-- MOV Rn, #value 
+				when "01111000" | "01111001" | "01111010" | "01111011" | "01111100" | "01111101" | "01111110" | "01111111" =>
+					case exe_state is 
+						when P1 => 							
+							exe_state <= P2;
+						when P2 =>
+							cpu_state <= S4;
+							exe_state <= P1;
+					end case;
 
-				--BEGIN ANL -------------------------------------------------------------------------					
+				--BEGIN ANL -----------------------------					
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -808,10 +876,58 @@ begin
 							
 							cpu_state <= S4;
 							exe_state <= P1;
-					end case;	
+					end case;
+
+				--DJNZ Rn,rel
+				when "11011000" | "11011001" | "11011010" | "11011011" | "11011100" | "11011101" | "11011110" | "11011111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S4;
+					end case;
+
+
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S4;
+					end case;
+						
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S4;
+					end case;
+
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S4;
+					end case;
+
+					
 				when others =>
 				end case;
 		
+		-----------------------------------------------------------------------------------------------------------------------------
 		when S4 => -- Fetch
 			case IR is
 			
@@ -835,8 +951,21 @@ begin
 							cpu_state <= S5;
 							exe_state <= P1;
 					end case;
+					
+					
+				-- MOV Rn, #value 
+				when "01111000" | "01111001" | "01111010" | "01111011" | "01111100" | "01111101" | "01111110" | "01111111" =>
+					case exe_state is 
+						when P1 => 			
+							ROM_READ(PC);
+							exe_state <= P2;
+						when P2 =>
+							PC <= PC + 1;
+							cpu_state <= S5;
+							exe_state <= P1;
+					end case;
 
-				--BEGIN ANL -------------------------------------------------------------------------		
+				--BEGIN ANL -----------------------------
 
 				-- ANL A, Rn
 				when "01011000" | "01011001" | "01011010" | "01011011" | "01011100" | "01011101" | "01011110" | "01011111" =>
@@ -1109,7 +1238,63 @@ begin
 							cpu_state <=S5;
 							exe_state <=P1;
 					end case;
+
+				--DJNZ Rn,rel
+				when "11011000" | "11011001" | "11011010" | "11011011" | "11011100" | "11011101" | "11011110" | "11011111" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC);
+							PC <= PC +1;						
+							exe_state <= P2;
+						
+						when P2 =>
+							DR <= i_rom_data; --rel
+							exe_state <= P1;
+							cpu_state <=S5;
+					end case;
+
+
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC);
+							exe_state <= P2;
+						
+						when P2 =>
+							PC <= PC + 1;
+							exe_state <= P1;
+							cpu_state <=S5;
+					end case;
+				
+				
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC);
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S5;
+					end case;
 					
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC);
+							exe_state <= P2;
+						
+						when P2 =>
+							ROM_READ(PC + 1);
+							AR <= i_rom_data;
+							exe_state <= P1;
+							cpu_state <=S5;
+					end case;
+
+
 				when others =>	
 			end case;
 			
@@ -1133,6 +1318,19 @@ begin
 						when P1 =>
 							exe_state <= P2;
 						when P2 =>
+							cpu_state <= S6;
+							exe_state <= P1;
+					end case;
+					
+				-- MOV Rn, #value 
+				when "01111000" | "01111001" | "01111010" | "01111011" | "01111100" | "01111101" | "01111110" | "01111111" =>
+					case exe_state is 
+						when P1 => 			
+							RAM_WRITE_BYTE("000" & i_ram_doByte(4 downto 3) & IR(2 downto 0));
+							i_ram_diByte <= i_rom_data;
+							exe_state <= P2;
+						when P2 =>
+							
 							cpu_state <= S6;
 							exe_state <= P1;
 					end case;
@@ -1367,9 +1565,57 @@ begin
 							exe_state <=P1;
 					end case;
 					
+				
+
+				--DJNZ Rn,rel
+				when "11011000" | "11011001" | "11011010" | "11011011" | "11011100" | "11011101" | "11011110" | "11011111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S6;
+					end case;
+				
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S6;
+					end case;
+						
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S6;
+					end case;
+
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S6;
+					end case;
+					
 					
 				when others =>
 			end case;
+		
+		---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 		when S6 => -- Execute
 			case IR is
@@ -1394,8 +1640,21 @@ begin
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;
+					
+					
+				-- MOV Rn, #value 
+				when "01111000" | "01111001" | "01111010" | "01111011" | "01111100" | "01111101" | "01111110" | "01111111" =>
+					case exe_state is 
+						when P1 => 			
+				
+							exe_state <= P2;
+						when P2 =>
+							
+							cpu_state <= S6;
+							exe_state <= P1;
+					end case;
 
-				--BEGIN ANL -------------------------------------------------------------------------		
+				--BEGIN ANL ------------------		
 
 
 				-- ANL A, Rn
@@ -1780,8 +2039,300 @@ begin
 							cpu_state <= S1;
 							exe_state <= P1;
 					end case;
+			
+				
+
+				--DJNZ Rn,rel
+				when "11011000" | "11011001" | "11011010" | "11011011" | "11011100" | "11011101" | "11011110" | "11011111" =>
+					case exe_state is
+						when P1 =>
+							alu_src_2L <= "00000000";
+							alu_src_2H <= "00000000";	
+							alu_src_1L <= i_ram_doByte;
+							alu_src_1H <= "00000000";	
+							alu_op_code <= ALU_OPC_SBB;
+							alu_cy_bw <= '1';	
+							alu_by_wd <= BYTE;
+							exe_state <= P2;
+						
+						when P2 =>
+							if( alu_ans_L /= "00000000" ) then
+								if(DR(7) = '0') then
+									PC <= PC + DR(6 downto 0);
+								else 
+									PC <= PC - not(DR(6 downto 0)) - 1;
+								end if;
+                            end if;
+							
+							i_ram_diByte <= alu_ans_L;
+							RAM_WRITE_BYTE(AR);
+
+							RESET_ALU;
+							exe_state <= P1;
+							cpu_state <=S7;
+					end case;
+							
+			
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S7;
+					end case;
+					
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+
+							if i_rom_data(7) = '1' then
+								alu_src_2L <= PC(7 downto 0);
+								alu_src_2H <= PC(15 downto 8);	
+								alu_src_1L <= i_rom_data;
+								alu_src_1H <= "11111111";	
+								alu_op_code <= ALU_OPC_ADD;
+								alu_cy_bw <= '0';
+								alu_by_wd <= '1';
+							
+							else
+								alu_src_2L <= PC(7 downto 0);
+								alu_src_2H <= PC(15 downto 8);	
+								alu_src_1L <= i_rom_data;
+								alu_src_1H <= "00000000";	
+								alu_op_code <= ALU_OPC_ADD;
+								alu_cy_bw <= '0';
+								alu_by_wd <= '1';
+								
+							end if;						
+							exe_state <= P2;
+						
+						when P2 =>
+						   PC <= alu_ans_H & alu_ans_L;
+							exe_state <= P1;
+							cpu_state <=S7;
+					end case;
+					
+
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S7;
+					end case;
+					
+
+				when others =>
+
+			end case;
+			
+		-- FETCH
+		when S7 =>
+			case IR is
+
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							ROM_READ(PC);
+							RAM_READ_BYTE(i_rom_data); --dir
+							exe_state <= P2;
+						
+						when P2 =>
+							PC <= PC +1;
+							AR <= i_rom_data;
+							exe_state <= P1;
+							cpu_state <=S8;
+					end case;
 					
 				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S8;
+						end case;				
+			end case;
+		
+		-- DECODE
+		when S8 =>
+			case IR is
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_rom_data;
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S9;
+					end case;
+				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S9;
+					end case;				
+			end case;
+			
+		-- EXECUTE
+		when S9 =>
+			case IR is
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							alu_src_2L <= "00000000";
+							alu_src_2H <= "00000000";	
+							alu_src_1L <= i_ram_doByte;
+							alu_src_1H <= "00000000";	
+							alu_op_code <= ALU_OPC_SBB;
+							alu_cy_bw <= '1';	
+							alu_by_wd <= BYTE;						
+							exe_state <= P2;
+						
+						when P2 =>
+							if( alu_ans_L /= "00000000" ) then
+								if(DR(7) = '0') then
+									PC <= PC + DR(6 downto 0);
+								else 
+									PC <= PC - not(DR(6 downto 0)) - 1;
+								end if;
+                            end if;
+							
+							i_ram_diByte <= alu_ans_L;
+							RAM_WRITE_BYTE(AR);
+							
+							RESET_ALU;						
+							exe_state <= P1;
+							cpu_state <=S10;
+					end case;
+			
+				--LJMP addr16
+				when "00000010" =>
+					case exe_state is
+						when P1 =>
+							PC <= AR & i_rom_data;  
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S10;
+					end case;
+							
+				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S10;
+					end case;
+			end case;
+	
+		-- FETCH
+		when S10 =>
+			case IR is
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_rom_data;
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S11;
+					end case;
+				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S11;
+					end case;
+			end case;
+			
+			
+		-- DECODE
+		when S11 =>
+			case IR is
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_rom_data;
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S12;
+					end case;
+				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S12;
+					end case;
+			end case;
+			
+			
+		-- EXECUTE
+		when S12 =>
+			case IR is
+				-- DJNZ direct, rel
+				when "11010101" =>
+					case exe_state is
+						when P1 =>
+							DR <= i_rom_data;
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S1;
+					end case;
+				
+				--SJMP rel
+				when "10000000" =>
+					case exe_state is
+						when P1 =>
+							PC <= PC + 1;
+							RESET_ALU;
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S1;
+					end case;
+				
+				when others =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						
+						when P2 =>
+							exe_state <= P1;
+							cpu_state <=S1;
+					end case;
 			end case;
 		
 	end case; --cpu_state
