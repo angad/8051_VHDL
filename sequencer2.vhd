@@ -173,8 +173,6 @@ begin
 	elsif (clk'event and clk = '1') then
 	case cpu_state is
 
--- Angad
-
 		when S1 => -- Fetch
 			case exe_state is
 				when P1 =>
@@ -228,6 +226,29 @@ begin
 							exe_state <= P1;
 					end case;
 
+				-- MOV @Ri, A
+				when "11110110" | "11110111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE(xE0);
+							exe_state <= P2;
+						when  P2 =>
+							DR <= i_ram_doByte;
+							RAM_READ_BYTE(xD0);
+							cpu_state <= S3;
+							exe_state <= P1;
+					end case;
+
+
+				--MOV direct, #data	
+				when "01110101" =>
+					case exe_state is 
+						when P1 =>
+							exe_state <= P2;
+						when  P2 =>
+							cpu_state <= S3;
+							exe_state <= P1;
+					end case;
 
 				--BEGIN ANL -------------------------------------------------------------------------					
 
@@ -472,8 +493,7 @@ begin
 							cpu_state <= S3;
 						end case;
 						
-				--END XRL -------------------------------------------------------------------------					
-
+				--END XRL -------------------------
 
 				-- ADD A, Rn
 				when "00101000" | "00101001" | "00101010" | "00101011" | "00101100" | "00101101" | "00101110" | "00101111" =>
@@ -580,6 +600,30 @@ begin
 							cpu_state <= S4;
 							exe_state <= P1;
 					end case;
+
+				-- MOV @Ri, A
+				when "11110110" | "11110111" =>
+					case exe_state is
+						when P1 =>
+							RAM_READ_BYTE("000" & i_ram_doByte(4 downto 3) & "00" & IR(0));
+							exe_state <= P2;
+						when P2 =>
+							i_ram_diByte <= DR;
+							RAM_WRITE_BYTE(i_ram_doByte);
+							cpu_state <= S4;
+							exe_state <= P1;
+					end case;
+
+				--MOV direct, #data	
+				when "01110101" =>
+					case exe_state is 
+						when P1 =>
+							exe_state <= P2;
+						when  P2 =>
+							cpu_state <= S4;
+							exe_state <= P1;
+					end case;
+
 
 				--BEGIN ANL -----------------------------					
 
@@ -965,6 +1009,30 @@ begin
 							exe_state <= P1;
 					end case;
 
+				-- MOV @Ri, A
+				when "11110110" | "11110111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						when P2 =>
+							cpu_state <= S5;
+							exe_state <= P1;
+					end case;
+
+				--MOV direct, #data	
+				when "01110101" =>
+					case exe_state is 
+						when P1 =>
+							ROM_READ(PC);
+							exe_state <= P2;
+						when  P2 =>
+							ROM_READ(PC + 1);
+							AR <= i_rom_data;
+							PC <= PC + 1;
+							cpu_state <= S5;
+							exe_state <= P1;
+					end case;
+
 				--BEGIN ANL -----------------------------
 
 				-- ANL A, Rn
@@ -1298,6 +1366,8 @@ begin
 				when others =>	
 			end case;
 			
+-----------------------------------------------------------------------------------------------
+
 		when S5 => -- Decode
 			case IR is
 			
@@ -1335,7 +1405,30 @@ begin
 							exe_state <= P1;
 					end case;
 
-				--BEGIN ANL -------------------------------------------------------------------------		
+				-- MOV @Ri, A
+				when "11110110" | "11110111" =>
+					case exe_state is
+						when P1 =>
+							exe_state <= P2;
+						when P2 =>
+							cpu_state <= S5;
+							exe_state <= P1;
+					end case;
+
+				--MOV direct, #data	
+				when "01110101" =>
+					case exe_state is 
+						when P1 =>
+							exe_state <= P2;
+						when  P2 =>
+							RAM_WRITE_BYTE(AR);
+							i_ram_diByte <= i_rom_data;
+							cpu_state <= S6;
+							exe_state <= P1;
+					end case;
+
+
+				--BEGIN ANL --------		
 
 
 				-- ANL A, Rn
@@ -1650,7 +1743,17 @@ begin
 							exe_state <= P2;
 						when P2 =>
 							
-							cpu_state <= S6;
+							cpu_state <= S1;
+							exe_state <= P1;
+					end case;
+
+				--MOV direct, #data	
+				when "01110101" =>
+					case exe_state is 
+						when P1 =>
+							exe_state <= P2;
+						when  P2 =>
+							cpu_state <= S7;
 							exe_state <= P1;
 					end case;
 
